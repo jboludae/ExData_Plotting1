@@ -1,3 +1,4 @@
+# follows same structure as plot1.R with a couple of changes
 temp<-tempfile()
 download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",temp,method="curl")
 unzip(temp)
@@ -6,8 +7,10 @@ household<-read.table("household_power_consumption.txt",header=T,sep=";",colClas
 household$Date<-as.Date(household$Date,format="%d/%m/%Y")
 household<-subset(household,household$Date=="2007-02-01"|household$Date=="2007-02-02")
 household[,3:9]<-apply(household[,3:9],2,as.numeric)
+# here we concatenate the Date and Time colums
 household$date_time<-paste(household$Date,household$Time)
 png(filename="plot2.png")
 par(mfrow=c(1,1))
+# we plot the Global_active_power (y axis) and the POSIXct time (x axis)
 plot(as.POSIXct(household$date_time),household$Global_active_power,type="l",ylab="Global Active Power (kilowatts)",xlab="")
 dev.off()

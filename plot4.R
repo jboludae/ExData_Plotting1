@@ -8,7 +8,9 @@ household<-subset(household,household$Date=="2007-02-01"|household$Date=="2007-0
 household[,3:9]<-apply(household[,3:9],2,as.numeric)
 household$date_time<-paste(household$Date,household$Time)
 png(filename="plot4.png")
+# We split the plotting area into 4 different pieces
 par(mfrow=c(2,2))
+# We plot the graphics one by one. No big misteries here...
 plot(as.POSIXct(household$date_time),household$Global_active_power,type="l",ylab="Global Active Power (kilowatts)",xlab="")
 plot(as.POSIXct(household$date_time),household$Voltage,type="l",ylab="Voltage",xlab="datetime")
 plot(as.POSIXct(household$date_time),household$Sub_metering_1,type="l",ylab="Energy sub metering",xlab="")

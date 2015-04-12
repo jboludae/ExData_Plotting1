@@ -9,7 +9,9 @@ household[,3:9]<-apply(household[,3:9],2,as.numeric)
 household$date_time<-paste(household$Date,household$Time)
 png(filename="plot3.png")
 plot(as.POSIXct(household$date_time),household$Sub_metering_1,type="l",ylab="Energy sub metering",xlab="")
+# We add the lines for submeters 2 and 3
 lines(as.POSIXct(household$date_time),household$Sub_metering_2,col="red")
 lines(as.POSIXct(household$date_time),household$Sub_metering_3,col="blue")
+# We add the legend
 legend("topright",col=c("black","red","blue"),lty=1,legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
 dev.off()
